@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block content %}
+            <form action="/modifica_nivel/{{nivel.0}}" method="post">
+              <div class="form-row">
+                  <label for="descripcion">Descripción</label>
+              </div>
+              <div class="form-row">
+                <div class="col">
+                    <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="descripcion" value="{{nivel.1}}">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Actualiza</button>
+            </form>
+
+{% endblock %}

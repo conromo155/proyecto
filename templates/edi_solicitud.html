@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+{% block content %}
+            <center><h3>Solicitud de personal</h3></center>
+            <form action="/modifica_solicitud/{{solicitud.0[0]}}" method="post">
+                <div class="form-row">
+                      &nbsp;&nbsp;&nbsp;
+                      <div class="form-group col-md-2">
+                          <label for="fecha">Fecha de solicitud</label>
+                          <input type="date" class="form-control" name="fecha" id="fecha" value="{{solicitud.0[1]}}">
+                      </div>
+                      <div class="form-group col-md-4">
+                            <label for="area_sol">Area</label>&nbsp;&nbsp;&nbsp;
+                            <select name="area_sol" id="area_sol" class="form-control">
+                                {% for area in areas %}
+                                        {% if solicitud.0[3]==area.0%}
+                                                <option value="{{ area.0 }}"  selected="true">{{ area.1 }}</option>
+                                        {% else %}
+                                                <option value="{{ area.0 }}">{{ area.1 }}</option>
+                                        {% endif %}
+
+
+                                {% endfor %}
+                            </select>&nbsp;&nbsp;
+                      </div>
+                       <div class="form-group col-md-4">
+                            <label for="Puesto_sol">Puesto</label>&nbsp;&nbsp;&nbsp;
+                            <select name="Puesto_sol" id="Puesto_sol" class="form-control">
+                                <option value="0" selected>Choose...</option>
+                                {% for puesto in puestos %}
+                                    {% if solicitud.0[4]==puesto.0%}
+                                        <option value="{{ puesto.0 }}" selected="true">{{ puesto.1 }}</option>
+                                    {% else %}
+                                         <option value="{{ puesto.0 }}">{{ puesto.1 }}</option>
+                                    {% endif %}
+                                {%   endfor %}
+                            </select>&nbsp;&nbsp;
+                      </div>
+
+                </div>
+               <div class="form-row">
+                      &nbsp;&nbsp;&nbsp;
+                      <div class="form-group col-md-4">
+                            <label for="Nivel_sol">Nivel Academico</label>&nbsp;&nbsp;&nbsp;
+                            <select name="Nivel_sol" id="Nivel_sol" class="form-control">
+                                <option value="0" selected>Choose...</option>
+                                {% for nivel in niveles %}
+                                    {% if solicitud.0[5]==nivel.0%}
+                                        <option value="{{ nivel.0 }}" selected="true">{{ nivel.1 }}</option>
+                                    {% else %}
+                                        <option value="{{ nivel.0 }}">{{ nivel.1 }}</option>
+                                    {% endif %}
+                                {%   endfor %}
+                            </select>&nbsp;&nbsp;
+                      </div>
+
+                      <div class="form-group col-md-4">
+                            <label for="Carrera_sol">Carrera/Especialidad</label>&nbsp;&nbsp;&nbsp;
+                            <select name="Carrera_sol" id="Carrera_sol" class="form-control">
+                                <option value="0" selected>Choose...</option>
+                                {% for carrera in carreras %}
+                                    {% if solicitud.0[6]==carrera.0%}
+                                        <option value="{{ carrera.0 }}" selected="true">{{ carrera.1 }}</option>
+                                    {% else %}
+                                         <option value="{{ carrera.0 }}">{{ carrera.1 }}</option>
+                                    {% endif %}
+                                {%   endfor %}
+                            </select>&nbsp;&nbsp;
+                      </div>
+               </div>
+
+                <div class="form-group col-md-4">
+                            <label for="Estatus_sol">Estado de la solicitud</label>&nbsp;&nbsp;&nbsp;
+                            <select name="Estatus_sol" id="Estatus_sol" class="form-control">
+                                {% for estado in estatus %}
+                                    {% if solicitud.0[7]==estado.0%}
+                                        <option value="{{ estado.0 }}" selected="true">{{ estado.1 }}</option>
+                                    {% else %}
+                                         <option value="{{ estado.0 }}">{{ estado.1 }}</option>
+                                    {% endif %}
+                                {%   endfor %}
+                            </select>&nbsp;&nbsp;
+                </div>
+
+               <div class="form-group col-md-2">
+                     <label for="Vacantes_sol">Numero de Vacantes</label>
+                     <input type="text" class="form-control" name="Vacantes_sol" id="Vacantes_sol" value="{{solicitud.0[2]}}">
+               </div>
+               &nbsp;&nbsp;&nbsp;
+               <button type="submit" class="btn btn-primary">Agrega</button>
+            </form>
+
+{% endblock %}

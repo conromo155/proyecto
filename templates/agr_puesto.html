@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block content %}
+            <center><h3>Definición del puesto</h3></center>
+            <form action="/agrega_puesto" method="post">
+              <div class="form-row">
+                  <label for="descripcion">Descripción del puesto</label>
+              </div>
+              <div class="form-row">
+
+                <div class="col">
+                    <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripción">
+                </div>
+
+              </div>
+
+              <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label for="salario">Salario Anual</label>
+                        <input type="text" class="form-control" name="salario" id="salario" placeholder="000000.00">
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label for="beneficios">Beneficios</label>
+                        <input type="text" class="form-control" name="beneficios" id="beneficios" placeholder="Beneficios">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="bonos">Bonos</label>
+                        <input type="text" class="form-control" name="bonos" id="bonos" placeholder="000000.00">
+                    </div>
+              </div>
+
+              <div class="form-row">
+                  <label>Requiera autorización</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <div class="form-check rorm-check-inline">
+                      <input class="form-check-input" type="radio" name="autorizar" id="autorizar1" value="0">
+                      <label class="form-check-label" for="autorizar1">Si</label>
+                  </div>
+                  &nbsp;&nbsp;&nbsp;
+                  <div class="form-check rorm-check-inline">
+                      <input class="form-check-input" type="radio" name="autorizar" id="autorizar2" value="1">
+                      <label class="form-check-label" for="autorizar2">No</label>
+                  </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Agrega</button>
+            </form>
+
+{% endblock %}

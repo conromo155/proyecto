@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block content %}
+            <form action="/modifica_empresa/{{empresa.0}}" method="post">
+              <div class="form-group col-md-11">
+                   <label for="nombre">Nombre de la empresa</label>
+                   <input type="text" class="form-control" name="nombre" id="nombre" value="{{empresa.1}}">
+              </div>
+              <div class="form-group col-md-11">
+                   <label for="razon">Razón Social</label>
+                   <input type="text" class="form-control" name="razon" id="razon" value="{{empresa.6}}">
+              </div>
+              <div class="form-group col-md-11">
+                   <label for="descripcion">Descripción de la empresa</label>
+                   <input type="text" class="form-control" name="descripcion" id="descripcion" value="{{empresa.2}}">
+              </div>
+              <div class="form-group col-md-11">
+                   <label for="domicilio">Domicilio</label>
+                   <input type="text" class="form-control" name="domicilio" id="domicilio" value="{{empresa.4}}">
+              </div>
+
+              <div class="form-row">
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                 <div class="form-group col-md-4">
+                     <label for="telefono">Telefono1</label>
+                     <input type="text" class="form-control" name="telefono" id="telefono" value="{{empresa.3}}">
+                  </div>
+                  <div class="form-group col-md-4">
+                      <label for="correoe">Correo electonico</label>
+                      <input type="email" class="form-control" name="correoe" id="correoe" value="{{empresa.5}}">
+                  </div>
+              </div>
+
+              <div class="form-row">
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="form-group col-md-2">
+                        <label for="estructura">Estructura Juridica</label>
+                        <input type="text" class="form-control" name="estructura" id="estructura" value="{{empresa.7}}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="encargado">Encargado</label>
+                        <input type="text" class="form-control" name="encargado" id="encargado" value="{{empresa.8}}">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="CIF">CIF de la empresa</label>
+                        <input type="text" class="form-control" name="CIF" id="CIF" value="{{empresa.9}}">
+                    </div>
+              </div>
+
+
+              <button type="submit" class="btn btn-primary">Modifica</button>
+            </form>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+<form action="/agrega_carrera" method="post">
+     <div class="form-row">
+        <label for="descripcion">Carrera</label>
+     </div>
+     <div class="form-row">
+         <div class="col">
+         <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Nombre Carrera">
+     </div>
+     </div>
+    <br>
+    <br>
+    <br>
+    <button type="submit" class="btn btn-primary">Agrega</button>
+</form>
+
+{% endblock %}

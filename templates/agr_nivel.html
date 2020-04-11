@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+<form action="/agrega_nivel" method="post">
+     <div class="form-row">
+        <label for="descripcion">Nivel</label>
+     </div>
+     <div class="form-row">
+         <div class="col">
+         <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Nombre">
+     </div>
+     </div>
+    <br>
+    <br>
+    <br>
+    <button type="submit" class="btn btn-primary">Agrega</button>
+</form>
+
+{% endblock %}

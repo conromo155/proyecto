@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>GYM Evolucion</title>
+    <!----  Liga a bootstrap (framework CSS)---!>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <!---- Liga a CSS local----!>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">GYM Evolucion</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <main class="container">
+            <div class="dropdown mb-3">
+                <a href="" class="btn btn-secondary dropdown-toggle" role="button" id="catalogos"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Catalogos del sistema
+                </a>
+                <div class="dropdown-menu" aria-labelledby="catalogos">
+                    <a href="/nivel" class="dropdown-item">Nivel Academico</a>
+                    <a href="/carrera" class="dropdown-item">Carrera</a>
+                    <a href="/idioma" class="dropdown-item">Idioma</a>
+                    <a href="/habilidad" class="dropdown-item">Habilidad</a>
+                    <a href="#" class="dropdown-item">Area</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="/puesto" class="dropdown-item">Puesto</a>
+                    <a href="/medio" class="dropdown-item">Medio de publicidad</a>
+                    <a href="/contacto" class="dropdown-item">Contacto</a>
+                    <a href="/empresa" class="dropdown-item">Datos de la empresa</a>
+                </div>
+            </div>
+             <div class="dropdown mb-3">
+                <a href="" class="btn btn-secondary dropdown-toggle" role="button" id="Empresa"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Procesos de la Empresa
+                </a>
+                <div class="dropdown-menu" aria-labelledby="Empresa">
+                    <a href="/solicitud" class="dropdown-item">Solicitud de personal</a>
+                    <a href="#" class="dropdown-item">Autorización de Solicitud</a>
+                    <a href="#" class="dropdown-item">Publicación de Oferta</a>
+                    <a href="#" class="dropdown-item">Captura de solicitantes</a>
+                </div>
+            </div>
+            &nbsp;<right><a class="nav-link" href="{{ url_for('home') }}">Home</a></right>
+
+	    <script type="text/javascript" src="/static/js/jquery-3.2.1.slim.min.js"></script>
+        <script type="text/javascript" src="/static/js/popper.min.js"></script>
+        <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>

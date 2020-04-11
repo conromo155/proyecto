@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block content %}
+      <table width="100%" border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+       <tbody>
+        <tr>
+          <td color="FFFFFF" bgcolor="#465F5A" valign="top">
+            <right><h2><a href="/nvo_medio">Agregar Medio de Publicidad</a></h2></right>
+            <center><h3>Medios registrados</h3></center>
+            <table width="100%" border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+              <thead>
+                <tr>
+                  <td color="white" bgcolor="black">Nombre</td>
+                  <td color="white" bgcolor="black"></td>
+                  <td color="white" bgcolor="black"></td>
+                </tr>
+              </thead>
+              <tbody>
+                {% for medio in medios %}
+                  <tr>
+                    <td>
+                      {{ medio.1 }}
+                    </td>
+                    <td bgcolor="#2B2D83" width="60">
+                      <center><a href="/ed_medio/{{medio.0}}" style="color:#FFFF00;">Editar</a></center>
+                    </td>
+                    <td  bgcolor="#3C3EC5" width="60">
+                      <center><a href="/bo_medio/{{medio.0}}" style="color:#FFFF00;">Borrar</a></center>
+                    </td>
+
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+
+
+{% endblock %}

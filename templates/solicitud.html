@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block content %}
+      <table width="100%" border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+       <tbody>
+        <tr>
+          <td color="FFFFFF" bgcolor="#465F5A" valign="top">
+            <right><h2><a href="/nvo_solicitud">Nueva solicitud</a></h2></right>
+            <center><h3>Solicitudes registradas</h3></center>
+            <table width="100%" border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+              <thead>
+                <tr>
+                  <td color="white" bgcolor="black">Fecha</td>
+                  <td color="white" bgcolor="black">Area</td>
+                  <td color="white" bgcolor="black">Puesto</td>
+                  <td color="white" bgcolor="black">Vacantes</td>
+                  <td color="white" bgcolor="black"></td>
+                  <td color="white" bgcolor="black"></td>
+                </tr>
+              </thead>
+              <tbody>
+                {% for solicitud in solicitudes %}
+                  <tr>
+                    <td>
+                      {{ solicitud.1 }}
+                    </td>
+                    <td>
+                      {{ solicitud.3 }}
+                    </td>
+                    <td>
+                      {{ solicitud.5 }}
+                    </td>
+                    <td>
+                      {{ solicitud.6 }}
+                    </td>
+
+                     <td bgcolor="#2B2D83" width="60">
+                      <center><a href="/ed_solicitud/{{solicitud.0}}" style="color:#FFFF00;">Editar</a></center>
+                    </td>
+                    <td  bgcolor="#3C3EC5" width="60">
+                      <center><a href="/bo_solicitud/{{solicitud.0}}" style="color:#FFFF00;">Borrar</a></center>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+            <form action="/agrega_contacto" method="post">
+              <div class="form-group col-md-8">
+                   <label for="nombre">Nombre</label>
+                   <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre">
+              </div>
+
+              <div class="form-group col-md-8">
+                   <label for="domicilio">Domicilio</label>
+                   <input type="text" class="form-control" name="domicilio" id="domicilio" placeholder="Domicilio">
+              </div>
+
+              <div class="form-group col-md-8">
+                   <label for="razon">Razón Social</label>
+                   <input type="text" class="form-control" name="razon" id="razon" placeholder="Razón Social">
+              </div>
+              <div class="form-group col-md-2">
+                   <label for="telefono">Telefono</label>
+                   <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Telefono">
+              </div>
+
+              <button type="submit" class="btn btn-primary">Agrega</button>
+            </form>
+
+{% endblock %}

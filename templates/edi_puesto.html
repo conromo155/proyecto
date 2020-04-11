@@ -1,0 +1,176 @@
+{% extends "layout.html" %}
+
+{% block content %}
+            <center><h3>Definición del puesto</h3></center>
+            <form action="/modifica_puesto/{{puestos.0[0]}}" method="post">
+              <div class="form-row">
+                  <label for="descripcion">Descripción del puesto</label>
+              </div>
+              <div class="form-row">
+
+                <div class="col">
+                    <input type="text" class="form-control" name="descripcion" id="descripcion" value="{{puestos.0[1]}}">
+                </div>
+
+              </div>
+
+              <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label for="salario">Salario Anual</label>
+                        <input type="text" class="form-control" name="salario" id="salario" value="{{puestos.0[2]}}">
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label for="beneficios">Beneficios</label>
+                        <input type="text" class="form-control" name="beneficios" id="beneficios" value="{{puestos.0[3]}}">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="bonos">Bonos</label>
+                        <input type="text" class="form-control" name="bonos" id="bonos" value="{{puestos.0[4]}}">
+                    </div>
+              </div>
+
+              <div class="form-row">
+                  <label>Requiera autorización</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                  {% if puestos.0[5]==0%}
+                      <div class="form-check rorm-check-inline">
+                          <input class="form-check-input" type="radio" name="autorizar" id="autorizar1" value="0" checked >
+                          <label class="form-check-label" for="autorizar1">Si</label>
+                      </div>
+                      &nbsp;&nbsp;&nbsp;
+                      <div class="form-check rorm-check-inline">
+                          <input class="form-check-input" type="radio" name="autorizar" id="autorizar2" value="1">
+                          <label class="form-check-label" for="autorizar2">No</label>
+                      </div>
+                  {% endif %}
+                  {% if puestos.0[5]==1%}
+                      <div class="form-check rorm-check-inline">
+                          <input class="form-check-input" type="radio" name="autorizar" id="autorizar1" value="0" >
+                          <label class="form-check-label" for="autorizar1">Si</label>
+                      </div>
+                      &nbsp;&nbsp;&nbsp;
+                      <div class="form-check rorm-check-inline">
+                          <input class="form-check-input" type="radio" name="autorizar" id="autorizar2" value="1" checked>
+                          <label class="form-check-label" for="autorizar2">No</label>
+                      </div>
+                  {% endif %}
+              </div>
+
+              <button type="submit" class="btn btn-primary">Actualiza</button>
+            </form>
+<!-- -----------------------------------------------------------------  -->
+            <br>
+            <center><h3>Habilidades asociadas</h3></center>
+
+             <div class="panel panel-primary">
+                  <div class="panel-heading" >
+                    <form class="form-inline" action="/agrega_hab_pto" method="post">
+                        <div class="form-row">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="hidden" name="pto" id="pto" value="{{puestos.0[0]}} >
+                             <label for="habil">Habilidad</label>&nbsp;&nbsp;&nbsp;
+                             <select name="habil" id="habil" class="form-control">
+                             <option value="0" selected>Choose...</option>
+                                 {%
+                                     for hab in habs
+                                 %}
+                                     <option value="{{ hab.0 }}">{{ hab.1 }}</option>
+                                {%   endfor %}
+                             </select>&nbsp;&nbsp;&nbsp;
+                             <label for="expe">Experiencia</label>&nbsp;&nbsp;&nbsp;
+                             <input type="text" class="form-control" name="expe" id="expe" placeholder="tiempo de experiencia">&nbsp;&nbsp;&nbsp;
+                         </div>&nbsp;&nbsp;&nbsp;
+                        <button type="submit" class="btn btn-primary">Agrega habilidad</button>
+                    </form>
+                  </div>
+                  <br>
+                  <div class="panel-body">
+                        <center>
+                        <table width="80%" border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+                          <thead>
+                            <tr>
+                              <td color="white" bgcolor="black">Habilidad</td>
+                              <td color="white" bgcolor="black">Experiencia</td>
+                              <td color="white" bgcolor="black"></td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for puesto in pue_habs %}
+                              <tr>
+                                <td>
+                                  {{ puesto.2 }}
+                                </td>
+                                <td>
+                                  {{ puesto.5 }}
+                                </td>
+                                <td  bgcolor="#3C3EC5" width="60">
+                                  <center><a href="/bo_hab_pto/{{puesto.0}}/{{puesto.4}}" style="color:#FFFF00;">Borrar</a></center>
+                                </td>
+
+                              </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                        </center>
+                  </div>
+            </div>
+
+<!-- -----------------------------------------------------------------  -->
+            <br>
+            <center><h3>Requerimientos de Idioma</h3></center>
+
+             <div class="panel panel-primary">
+                  <div class="panel-heading" >
+                    <form class="form-inline" action="/agrega_idio_pto" method="post">
+                        <div class="form-row">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="hidden" name="ptoi" id="ptoi" value="{{puestos.0[0]}} >
+                             <label for="idio">Idioma</label>&nbsp;&nbsp;&nbsp;
+                             <select name="idio" id="idio" class="form-control">
+                             <option value="0" selected>Choose...</option>
+                                 {%
+                                     for idioma in idiomas
+                                 %}
+                                     <option value="{{ idioma.0 }}">{{ idioma.1 }}</option>
+                                {%   endfor %}
+                             </select>&nbsp;&nbsp;&nbsp;
+                             <label for="nive">Nivel</label>&nbsp;&nbsp;&nbsp;
+                             <input type="text" class="form-control" name="nive" id="nive" placeholder="Nivel en el idioma">&nbsp;&nbsp;&nbsp;
+                         </div>&nbsp;&nbsp;&nbsp;
+                        <button type="submit" class="btn btn-primary">Agrega Idioma</button>
+                    </form>
+                  </div>
+                  <br>
+                  <div class="panel-body">
+                        <center>
+                        <table width="80%" border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+                          <thead>
+                            <tr>
+                              <td color="white" bgcolor="black">Idioma</td>
+                              <td color="white" bgcolor="black">Nivel</td>
+                              <td color="white" bgcolor="black"></td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for pue_idi in pue_idis %}
+                              <tr>
+                                <td>
+                                  {{ pue_idi.2 }}
+                                </td>
+                                <td>
+                                  {{ pue_idi.5 }}
+                                </td>
+                                <td  bgcolor="#3C3EC5" width="60">
+                                  <center><a href="/bo_idi_pto/{{ pue_idi.0 }}/{{ pue_idi.4 }}" style="color:#FFFF00;">Borrar</a></center>
+                                </td>
+
+                              </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                        </center>
+                  </div>
+            </div>
+
+{% endblock %}
