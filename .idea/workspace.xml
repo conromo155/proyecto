@@ -13,8 +13,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/inicio.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="784">
-              <caret line="431" column="91" selection-start-line="431" selection-start-column="91" selection-end-line="431" selection-end-column="91" />
+            <state relative-caret-position="447">
+              <caret line="695" column="12" selection-start-line="695" selection-start-column="12" selection-end-line="695" selection-end-column="12" />
               <folding>
                 <element signature="e#0#75#0" expanded="true" />
               </folding>
@@ -149,6 +149,9 @@
       <replace>idioma</replace>
     </replaceStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -182,12 +185,12 @@
         <option value="$PROJECT_DIR$/templates/edi_habilidad.html" />
         <option value="$PROJECT_DIR$/templates/agr_puesto.html" />
         <option value="$PROJECT_DIR$/templates/edi_puesto.html" />
-        <option value="$PROJECT_DIR$/inicio.py" />
         <option value="$PROJECT_DIR$/templates/solicitud.html" />
         <option value="$PROJECT_DIR$/templates/layout.html" />
         <option value="$PROJECT_DIR$/templates/idioma.html" />
         <option value="$PROJECT_DIR$/templates/edi_solicitud.html" />
         <option value="$PROJECT_DIR$/templates/agr_solicitud.html" />
+        <option value="$PROJECT_DIR$/inicio.py" />
       </list>
     </option>
   </component>
@@ -197,6 +200,7 @@
     <option name="width" value="1346" />
     <option name="height" value="688" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -244,6 +248,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../adistancia/web/beta/Proyecto Beta" />
   </component>
   <component name="RecentsManager">
@@ -538,22 +543,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="64" selection-start-line="3" selection-start-column="47" selection-end-line="3" selection-end-column="64" />
-          <folding>
-            <element signature="e#229#235#0" expanded="true" />
-            <element signature="e#235#241#0" expanded="true" />
-            <element signature="e#241#247#0" expanded="true" />
-            <element signature="e#1270#1276#0" expanded="true" />
-            <element signature="e#1615#1621#0" expanded="true" />
-            <element signature="e#1741#1747#0" expanded="true" />
-            <element signature="e#1747#1753#0" expanded="true" />
-            <element signature="e#1753#1759#0" expanded="true" />
-            <element signature="e#2309#2315#0" expanded="true" />
-            <element signature="e#2919#2925#0" expanded="true" />
-            <element signature="e#5020#5026#0" expanded="true" />
-            <element signature="e#3512#3518#0" expanded="true" />
-            <element signature="e#3518#3524#0" expanded="true" />
-            <element signature="e#3524#3530#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -568,9 +557,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="n#style#0;n#a#0;n#center#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -612,8 +598,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/inicio.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="784">
-          <caret line="431" column="91" selection-start-line="431" selection-start-column="91" selection-end-line="431" selection-end-column="91" />
+        <state relative-caret-position="447">
+          <caret line="695" column="12" selection-start-line="695" selection-start-column="12" selection-end-line="695" selection-end-column="12" />
           <folding>
             <element signature="e#0#75#0" expanded="true" />
           </folding>
