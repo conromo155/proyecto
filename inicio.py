@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import pymysql
-
+import os
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-
+# Carpeta de subida
+app.config['UPLOAD_FOLDER'] = './pdfs'
 # sesion
 app.secret_key = 'mysecretkey'
 
@@ -17,7 +19,7 @@ def home():
 #------------------------------- nivel -------------------------------------------------
 @app.route('/nivel')
 def nivel():
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('select idNivelAcademico, Descripcion from nivelacademico order by Descripcion')
 	datos=cursor.fetchall()
@@ -32,7 +34,7 @@ def agrega_nivel():
 	if request.method == 'POST':
 		aux_Descripcion=request.form['descripcion']
 
-		conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+		conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 		cursor = conn.cursor()
 		cursor.execute('insert into nivelacademico (Descripcion) values (%s)',(aux_Descripcion))
 		conn.commit()
@@ -41,7 +43,7 @@ def agrega_nivel():
 
 @app.route('/ed_nivel/<string:id>')
 def ed_nivel(id):
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('select idNivelAcademico, Descripcion from nivelacademico where idNivelAcademico = %s', (id))
 	dato=cursor.fetchall()
@@ -51,7 +53,7 @@ def ed_nivel(id):
 def modifica_nivel(id):
 	if request.method == 'POST':
 		descrip=request.form['descripcion']
-		conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+		conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 		cursor = conn.cursor()
 		cursor.execute('update nivelacademico set  Descripcion=%s where idNivelAcademico=%s',(descrip,id))
 		conn.commit()
@@ -59,7 +61,7 @@ def modifica_nivel(id):
 
 @app.route('/bo_nivel/<string:id>')
 def bo_nivel(id):
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('delete from nivelacademico where idNivelAcademico = {0}'.format(id))
 	conn.commit()
@@ -69,7 +71,7 @@ def bo_nivel(id):
 #------------------------------- carrera -------------------------------------------------
 @app.route('/carrera')
 def carrera():
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('select idCarrera, Descripcion from carrera order by Descripcion')
 	datos=cursor.fetchall()
@@ -79,7 +81,7 @@ def carrera():
 def agrega_carrera():
 	if request.method == 'POST':
 		aux_Descripcion=request.form['descripcion']
-		conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+		conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 		cursor = conn.cursor()
 		cursor.execute('insert into carrera (Descripcion) values (%s)',(aux_Descripcion))
 		conn.commit()
@@ -93,7 +95,7 @@ def nvo_carrera():
 def modifica_carrera(id):
 	if request.method == 'POST':
 		descrip=request.form['descripcion']
-		conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+		conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 		cursor = conn.cursor()
 		cursor.execute('update carrera set  Descripcion=%s where idCarrera=%s',(descrip,id))
 		conn.commit()
@@ -101,7 +103,7 @@ def modifica_carrera(id):
 
 @app.route('/ed_carrera/<string:id>')
 def ed_carrera(id):
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('select idCarrera, Descripcion from carrera where idCarrera = %s', (id))
 	dato=cursor.fetchall()
@@ -111,7 +113,7 @@ def ed_carrera(id):
 
 @app.route('/bo_carrera/<string:id>')
 def bo_carrera(id):
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('delete from carrera where idCarrera = {0}'.format(id))
 	conn.commit()
@@ -121,7 +123,7 @@ def bo_carrera(id):
 #------------------------------- idioma -------------------------------------------------
 @app.route('/idioma')
 def idioma():
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('select idIdioma, lenguaje from idioma order by lenguaje')
 	datos=cursor.fetchall()
@@ -131,7 +133,7 @@ def idioma():
 def agrega_idioma():
 	if request.method == 'POST':
 		aux_Descripcion=request.form['descripcion']
-		conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+		conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 		cursor = conn.cursor()
 		cursor.execute('insert into idioma (lenguaje) values (%s)',(aux_Descripcion))
 		conn.commit()
@@ -145,7 +147,7 @@ def nvo_idioma():
 def modifica_idioma(id):
 	if request.method == 'POST':
 		descrip=request.form['descripcion']
-		conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+		conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 		cursor = conn.cursor()
 		cursor.execute('update idioma set  lenguaje=%s where idIdioma=%s',(descrip,id))
 		conn.commit()
@@ -153,7 +155,7 @@ def modifica_idioma(id):
 
 @app.route('/ed_idioma/<string:id>')
 def ed_idioma(id):
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('select idIdioma, lenguaje from idioma where idIdioma = %s', (id))
 	dato=cursor.fetchall()
@@ -163,7 +165,7 @@ def ed_idioma(id):
 
 @app.route('/bo_idioma/<string:id>')
 def bo_idioma(id):
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('delete from idioma where idIdioma = {0}'.format(id))
 	conn.commit()
@@ -172,7 +174,7 @@ def bo_idioma(id):
 #------------------------------- puesto -------------------------------------------------
 @app.route('/puesto')
 def puesto():
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('select idPuesto, Descripcion, SalarioAnual, Beneficios, Bonos, Aprobacion from puesto order by Descripcion')
 
@@ -188,7 +190,7 @@ def agrega_puesto():
 		aux_bon = request.form['bonos']
 		aux_aut = request.form['autorizar']
 
-		conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+		conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 		cursor = conn.cursor()
 		cursor.execute('insert into puesto (Descripcion, SalarioAnual, Beneficios, Bonos, Aprobacion) values (%s,%s,%s,%s,%s)',(aux_des, aux_sal,aux_ben, aux_bon, aux_aut))
 		conn.commit()
@@ -224,7 +226,7 @@ def modifica_puesto(id):
 		aux_bon = request.form['bonos']
 		aux_aut = request.form['autorizar']
 
-		conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+		conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 		cursor = conn.cursor()
 		cursor.execute('update puesto set Descripcion=%s, SalarioAnual=%s, Beneficios=%s, Bonos=%s, Aprobacion=%s where idpuesto=%s', (aux_des, aux_sal,aux_ben, aux_bon, aux_aut,id))
 		conn.commit()
@@ -232,7 +234,7 @@ def modifica_puesto(id):
 
 @app.route('/ed_puesto/<string:id>')
 def ed_puesto(id):
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('select idPuesto, Descripcion, SalarioAnual, Beneficios, Bonos, Aprobacion '
 				   'from  puesto where idPuesto=%s', (id))
@@ -254,7 +256,7 @@ def ed_puesto(id):
 
 @app.route('/bo_puesto/<string:id>')
 def bo_puesto(id):
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('delete from puesto_has_Idioma where idPuesto = {0}'.format(id))
 	conn.commit()
@@ -273,7 +275,7 @@ def agrega_hab_pto():
 		aux_hab = request.form['habil']
 		aux_exp = request.form['expe']
 
-		conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+		conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 		cursor = conn.cursor()
 		cursor.execute('insert into puesto_has_habilidad (idPuesto, idHabilidad, Experiencia) values (%s,%s,%s)',(aux_pto,aux_hab,aux_exp))
 		conn.commit()
@@ -303,7 +305,7 @@ def agrega_idio_pto():
 		aux_idi = request.form['idio']
 		aux_niv = request.form['nive']
 
-		conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+		conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 		cursor = conn.cursor()
 		cursor.execute('insert into puesto_has_idioma (idPuesto, idIdioma, Nivel) values (%s,%s,%s)',(aux_pto,aux_idi,aux_niv))
 		conn.commit()
@@ -328,7 +330,7 @@ def agrega_idio_pto():
 
 @app.route('/bo_hab_pto/<string:idP>/<string:idH>')
 def bo_hab_pto(idP,idH):
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('delete from puesto_has_habilidad where idPuesto =%s and idHabilidad=%s ',(idP,idH))
 	conn.commit()
@@ -354,7 +356,7 @@ def bo_hab_pto(idP,idH):
 
 @app.route('/bo_idi_pto/<string:idP>/<string:idI>')
 def bo_idi_pto(idP,idI):
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('delete from puesto_has_idioma where idPuesto =%s and idIdioma=%s ',(idP,idI))
 	conn.commit()
@@ -381,7 +383,7 @@ def bo_idi_pto(idP,idI):
 #------------------------------- medio -------------------------------------------------
 @app.route('/medio')
 def medio():
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('select idMedioPublicidad, Descripcion from mediopublicidad order by descripcion')
 	datos=cursor.fetchall()
@@ -391,7 +393,7 @@ def medio():
 def agrega_medio():
 	if request.method == 'POST':
 		aux_Descripcion=request.form['descripcion']
-		conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+		conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 		cursor = conn.cursor()
 		cursor.execute('insert into mediopublicidad (Descripcion) values (%s)',(aux_Descripcion))
 		conn.commit()
@@ -405,7 +407,7 @@ def nvo_medio():
 def modifica_medio(id):
 	if request.method == 'POST':
 		descrip=request.form['descripcion']
-		conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+		conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 		cursor = conn.cursor()
 		cursor.execute('update mediopublicidad set  descripcion=%s where idMedioPublicidad=%s',(descrip,id))
 		conn.commit()
@@ -413,7 +415,7 @@ def modifica_medio(id):
 
 @app.route('/ed_medio/<string:id>')
 def ed_medio(id):
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('select idMedioPublicidad, Descripcion from mediopublicidad where idMedioPublicidad = %s', (id))
 	dato=cursor.fetchall()
@@ -422,7 +424,7 @@ def ed_medio(id):
 
 @app.route('/bo_medio/<string:id>')
 def bo_medio(id):
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('delete from mediopublicidad where idMedioPublicidad = {0}'.format(id))
 	conn.commit()
@@ -432,7 +434,7 @@ def bo_medio(id):
 #------------------------------- contacto -------------------------------------------------
 @app.route('/contacto')
 def contacto():
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 
 	cursor.execute('select idcontacto, Nombre, Domicilio, Razon_Social, Telefono from contacto order by nombre')
@@ -446,7 +448,7 @@ def agrega_contacto():
 		aux_dom = request.form['domicilio']
 		aux_raz = request.form['razon']
 		aux_tel = request.form['telefono']
-		conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+		conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 		cursor = conn.cursor()
 		cursor.execute('insert into contacto (Nombre,Domicilio,Razon_social,Telefono) values (%s,%s,%s,%s)',(aux_nom, aux_dom,aux_raz, aux_tel))
 		conn.commit()
@@ -463,7 +465,7 @@ def modifica_contacto(id):
 		aux_dom = request.form['domicilio']
 		aux_raz = request.form['razon']
 		aux_tel = request.form['telefono']
-		conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+		conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 		cursor = conn.cursor()
 		cursor.execute('update contacto set Nombre=%s,Domicilio=%s,Razon_social=%s,Telefono=%s where idContacto=%s',(aux_nom, aux_dom,aux_raz, aux_tel,id))
 		conn.commit()
@@ -471,7 +473,7 @@ def modifica_contacto(id):
 
 @app.route('/ed_contacto/<string:id>')
 def ed_contacto(id):
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('select idContacto, Nombre, Domicilio, Razon_social, telefono from contacto where idContacto = %s', (id))
 	dato=cursor.fetchall()
@@ -481,7 +483,7 @@ def ed_contacto(id):
 
 @app.route('/bo_contacto/<string:id>')
 def bo_contacto(id):
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('delete from contacto where idContacto = {0}'.format(id))
 	conn.commit()
@@ -490,7 +492,7 @@ def bo_contacto(id):
 #------------------------------- contacto -------------------------------------------------
 @app.route('/empresa')
 def empresa():
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('SELECT idEmpresa, Nombre_de_empresa, Descripcion, telefono, domicilio, E_mail, RazonSocial, EStructura_Juridica, Encargado, CIF_Empresa FROM datos_de_empresa ORDER BY nombre_de_empresa')
 	datos=cursor.fetchall()
@@ -510,7 +512,7 @@ def modifica_empresa(id):
 		aux_est = request.form['estructura']
 		aux_enc = request.form['encargado']
 		aux_cif = request.form['CIF']
-		conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+		conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 		cursor = conn.cursor()
 		cursor.execute(''
 		'update datos_de_empresa set Nombre_de_empresa=%s, Descripcion=%s, telefono=%s, domicilio=%s, E_mail=%s, RazonSocial=%s' 
@@ -520,7 +522,7 @@ def modifica_empresa(id):
 
 @app.route('/ed_empresa/<string:id>')
 def ed_empresa(id):
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute(''
 				   'SELECT idEmpresa, Nombre_de_empresa, Descripcion, telefono, domicilio, E_mail, RazonSocial, Estructura_Juridica'
@@ -533,7 +535,7 @@ def ed_empresa(id):
 #------------------------------- habilidad -------------------------------------------------
 @app.route('/habilidad')
 def habilidad():
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('select idhabilidad, Descripcion from habilidad order by Descripcion')
 	datos=cursor.fetchall()
@@ -548,7 +550,7 @@ def agrega_habilidad():
 	if request.method == 'POST':
 		aux_Descripcion=request.form['descripcion']
 
-		conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+		conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 		cursor = conn.cursor()
 		cursor.execute('insert into habilidad (Descripcion) values (%s)',(aux_Descripcion))
 		conn.commit()
@@ -557,7 +559,7 @@ def agrega_habilidad():
 
 @app.route('/ed_habilidad/<string:id>')
 def ed_habilidad(id):
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('select idhabilidad, Descripcion from habilidad where idhabilidad = %s', (id))
 	dato=cursor.fetchall()
@@ -567,7 +569,7 @@ def ed_habilidad(id):
 def modifica_habilidad(id):
 	if request.method == 'POST':
 		descrip=request.form['descripcion']
-		conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+		conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 		cursor = conn.cursor()
 		cursor.execute('update habilidad set  Descripcion=%s where idhabilidad=%s',(descrip,id))
 		conn.commit()
@@ -575,27 +577,27 @@ def modifica_habilidad(id):
 
 @app.route('/bo_habilidad/<string:id>')
 def bo_habilidad(id):
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('delete from habilidad where idhabilidad = {0}'.format(id))
 	conn.commit()
 	return redirect(url_for('habilidad'))
 
-#------------------------------- puesto -------------------------------------------------
+#------------------------------- solicitud -------------------------------------------------
 @app.route('/solicitud')
 def solicitud():
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
-	cursor.execute('select a.idSolicitud,a.FechaSolicitud,a.idArea,b.AreaNombre,a.idPuesto,c.Descripcion, a.NumeroVacante '   
-                    'from solicitud a, area b, puesto c '
-                    'where b.idArea=a.idArea and c.idPuesto=a.idPuesto')
+	cursor.execute('select a.idSolicitud,a.FechaSolicitud,a.idArea,b.AreaNombre,a.idPuesto,c.Descripcion, a.NumeroVacante, a.idEstatus_Solicitud, d.Descripcion '   
+                    'from solicitud a, area b, puesto c, estatus_solicitud d '
+                    'where b.idArea=a.idArea and c.idPuesto=a.idPuesto and d.idEstatus_Solicitud=a.idEstatus_Solicitud')
 
 	datos=cursor.fetchall()
 	return render_template("solicitud.html", solicitudes = datos )
 
 @app.route('/nvo_solicitud')
 def nvo_solicitud():
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('select idArea, AreaNombre  from  area')
 	datos=cursor.fetchall()
@@ -619,23 +621,37 @@ def agrega_solicitud():
 		aux_car = request.form['Carrera_sol']
 		aux_vac = request.form['Vacantes_sol']
 
-		conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+
+		conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 		cursor = conn.cursor()
-		cursor.execute('insert into solicitud (FechaSolicitud, idArea, idPuesto, idNivelAcademico, idCarrera, NumeroVacante, idEstatus_Solicitud) '
+
+		#---------- estatus de la solicitud 1 pendeiente de aprobación, 2 Aprobada (si el puesto no requiere de aprobación)
+		cursor.execute('select Aprobacion from puesto where idPuesto= %s', (aux_pue))
+		req_ap= cursor.fetchone()
+
+		if req_ap[0]==0:
+			# el puesto requiere de autorización
+			cursor.execute('insert into solicitud (FechaSolicitud, idArea, idPuesto, idNivelAcademico, idCarrera, NumeroVacante, idEstatus_Solicitud) '
 					   'values (%s,%s,%s,%s,%s,%s,1)',(aux_fec,aux_are,aux_pue,aux_niv,aux_car,aux_vac))
+		else:
+			# el puesto NO requiere de autorización
+			cursor.execute(
+				'insert into solicitud (FechaSolicitud, idArea, idPuesto, idNivelAcademico, idCarrera, NumeroVacante, idEstatus_Solicitud) '
+				'values (%s,%s,%s,%s,%s,%s,2)', (aux_fec, aux_are, aux_pue, aux_niv, aux_car, aux_vac))
+		# --------------------------------------)
 		conn.commit()
 
 		cursor.execute(
-			'select a.idSolicitud,a.FechaSolicitud,a.idArea,b.AreaNombre,a.idPuesto,c.Descripcion, a.NumeroVacante '
-			'from solicitud a, area b, puesto c '
-			'where b.idArea=a.idArea and c.idPuesto=a.idPuesto')
+			'select a.idSolicitud,a.FechaSolicitud,a.idArea,b.AreaNombre,a.idPuesto,c.Descripcion, a.NumeroVacante, a.idEstatus_Solicitud, d.Descripcion '
+			'from solicitud a, area b, puesto c, estatus_solicitud d '
+			'where b.idArea=a.idArea and c.idPuesto=a.idPuesto and d.idEstatus_Solicitud=a.idEstatus_Solicitud')
 
 		datos = cursor.fetchall()
 	return render_template("solicitud.html", solicitudes=datos)
 
 @app.route('/ed_solicitud/<string:id>')
 def ed_solicitud(id):
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('select idSolicitud, FechaSolicitud, NumeroVacante, idArea, idPuesto, idNivelAcademico, idCarrera, idEstatus_Solicitud '   
                     'from solicitud  where idSolicitud=%s', (id))
@@ -665,32 +681,89 @@ def modifica_solicitud(id):
 		aux_vac = request.form['Vacantes_sol']
 		aux_est = request.form['Estatus_sol']
 
-		conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+		conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 		cursor = conn.cursor()
+		#------------------------------------------------------------------------------------------------------
 		cursor.execute('update solicitud set FechaSolicitud=%s, NumeroVacante=%s, idArea=%s,'
 					   ' idPuesto=%s, idNivelAcademico=%s, idCarrera=%s, idEstatus_Solicitud=%s '
 					   ' where idSolicitud=%s',(aux_fec, aux_vac, aux_are, aux_pue, aux_niv, aux_car, aux_est, id ))
 		conn.commit()
-		cursor.execute('select a.idSolicitud,a.FechaSolicitud,a.idArea,b.AreaNombre,a.idPuesto,c.Descripcion, a.NumeroVacante '   
-                    'from solicitud a, area b, puesto c '
-                    'where b.idArea=a.idArea and c.idPuesto=a.idPuesto')
+		cursor.execute(
+			'select a.idSolicitud,a.FechaSolicitud,a.idArea,b.AreaNombre,a.idPuesto,c.Descripcion, a.NumeroVacante, a.idEstatus_Solicitud, d.Descripcion '
+			'from solicitud a, area b, puesto c, estatus_solicitud d '
+			'where b.idArea=a.idArea and c.idPuesto=a.idPuesto and d.idEstatus_Solicitud=a.idEstatus_Solicitud')
 
 		datos=cursor.fetchall()
 	return render_template("solicitud.html", solicitudes = datos )
 
 @app.route('/bo_solicitud/<string:id>')
 def bo_solicitud(id):
-	conn = pymysql.connect(host='conromo155.mysql.pythonanywhere-services.com', user='conromo155', passwd='desarrollo', db='r_humanos')
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
 	cursor = conn.cursor()
 	cursor.execute('delete from solicitud where idsolicitud = {0}'.format(id))
 	conn.commit()
+	#-----------------------------------------------------------------------
 	cursor.execute(
-		'select a.idSolicitud,a.FechaSolicitud,a.idArea,b.AreaNombre,a.idPuesto,c.Descripcion, a.NumeroVacante '
-		'from solicitud a, area b, puesto c '
-		'where b.idArea=a.idArea and c.idPuesto=a.idPuesto')
+		'select a.idSolicitud,a.FechaSolicitud,a.idArea,b.AreaNombre,a.idPuesto,c.Descripcion, a.NumeroVacante, a.idEstatus_Solicitud, d.Descripcion '
+		'from solicitud a, area b, puesto c, estatus_solicitud d '
+		'where b.idArea=a.idArea and c.idPuesto=a.idPuesto and d.idEstatus_Solicitud=a.idEstatus_Solicitud')
 
 	datos = cursor.fetchall()
 	return render_template("solicitud.html", solicitudes = datos )
 
+#------------------------------- autorización de la solicitud -------------------------------------------------
+@app.route('/autoriza')
+def autoriza():
+	conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
+	cursor = conn.cursor()
+	cursor.execute('select a.idSolicitud,a.FechaSolicitud,a.idArea,b.AreaNombre,a.idPuesto,c.Descripcion, a.NumeroVacante, a.idEstatus_Solicitud, d.Descripcion '   
+                    'from solicitud a, area b, puesto c, estatus_solicitud d '
+                    'where b.idArea=a.idArea and c.idPuesto=a.idPuesto and d.idEstatus_Solicitud=a.idEstatus_Solicitud')
+
+	datos=cursor.fetchall()
+	return render_template("autoriza_solicitud.html", solicitudes = datos )
+
+@app.route('/aut_solicitud/<string:id>')
+def aut_solicitud(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
+    cursor = conn.cursor()
+    cursor.execute('update solicitud set idEstatus_Solicitud=2 where idSolicitud=%s',(id ))
+    conn.commit()
+    cursor.execute(
+	    'select a.idSolicitud,a.FechaSolicitud,a.idArea,b.AreaNombre,a.idPuesto,c.Descripcion, a.NumeroVacante, a.idEstatus_Solicitud, d.Descripcion '
+	    'from solicitud a, area b, puesto c, estatus_solicitud d '
+	    'where b.idArea=a.idArea and c.idPuesto=a.idPuesto and d.idEstatus_Solicitud=a.idEstatus_Solicitud')
+    datos=cursor.fetchall()
+    return render_template("autoriza_solicitud.html", solicitudes = datos )
+
+@app.route('/can_solicitud/<string:id>')
+def can_solicitud(id):
+    conn = pymysql.connect(host='localhost', user='root', passwd='desarrollo', db='r_humanos')
+    cursor = conn.cursor()
+    cursor.execute('update solicitud set idEstatus_Solicitud=6 where idSolicitud=%s',(id ))
+    conn.commit()
+    cursor.execute(
+	    'select a.idSolicitud,a.FechaSolicitud,a.idArea,b.AreaNombre,a.idPuesto,c.Descripcion, a.NumeroVacante, a.idEstatus_Solicitud, d.Descripcion '
+	    'from solicitud a, area b, puesto c, estatus_solicitud d '
+	    'where b.idArea=a.idArea and c.idPuesto=a.idPuesto and d.idEstatus_Solicitud=a.idEstatus_Solicitud')
+    datos=cursor.fetchall()
+    return render_template("autoriza_solicitud.html", solicitudes = datos )
+
+
+@app.route('/archivos')
+def archivos():
+	return render_template("archivos.html")
+
+@app.route('/sube_archivo', methods=['POST'])
+def sube_archivo():
+	if request.method == 'POST':
+		f = request.files['archivo']
+		filename = secure_filename(f.filename)
+		# Guardamos el archivo en el directorio "Archivos PDF"
+		f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+		# Retornamos una respuesta satisfactoria
+		return filename
+
+
 if __name__ == "__main__":
-	app.run()
+	app.run(port=3000, debug=True)

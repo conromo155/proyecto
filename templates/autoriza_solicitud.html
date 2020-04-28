@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block content %}
+      <table width="100%" border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+       <tbody>
+        <tr>
+          <td color="FFFFFF" bgcolor="#465F5A" valign="top">
+            <center><h3>Solicitudes registradas</h3></center>
+            <table width="100%" border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+              <thead>
+                <tr>
+                  <td color="white" bgcolor="black">Fecha</td>
+                  <td color="white" bgcolor="black">Area</td>
+                  <td color="white" bgcolor="black">Puesto</td>
+                  <td color="white" bgcolor="black">Vacantes</td>
+                  <td color="white" bgcolor="black">Estado</td>
+                  <td color="white" bgcolor="black"></td>
+                  <td color="white" bgcolor="black"></td>
+                </tr>
+              </thead>
+              <tbody>
+                {% for solicitud in solicitudes %}
+                  <tr>
+                    <td>
+                      {{ solicitud.1 }}
+                    </td>
+                    <td>
+                      {{ solicitud.3 }}
+                    </td>
+                    <td>
+                      {{ solicitud.5 }}
+                    </td>
+                    <td>
+                      {{ solicitud.6 }}
+                    </td>
+                     <td>
+                      {{ solicitud.8 }}
+                     </td>
+                    {% if solicitud.7==1%}
+                         <td bgcolor="#2B2D83" width="60">
+                            <center><a href="/aut_solicitud/{{solicitud.0}}" style="color:#FFFF00;">Autorizar</a></center>
+                         </td>
+                         <td  bgcolor="#3C3EC5" width="60">
+                             <center><a href="/can_solicitud/{{solicitud.0}}" style="color:#FFFF00;">Cancelar</a></center>
+                         </td>
+                    {% else %}
+                         <td bgcolor="#2B2D83" width="60">
+                            <center><a href="/solicitud" style="color:#FFFF00;">------</a></center>
+                         </td>
+                         <td  bgcolor="#3C3EC5" width="60">
+                             <center><a href="/solicitud" style="color:#FFFF00;">------</a></center>
+                         </td>
+                    {% endif %}
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+{% endblock %}

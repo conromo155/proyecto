@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<form action="/sube_archivo" method="POST" enctype="multipart/form-data">
+ <input type="file" name="archivo">
+ <input type="submit">
+</form>
+
+
+
+{% endblock %}

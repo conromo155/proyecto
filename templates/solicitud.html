@@ -13,6 +13,7 @@
                   <td color="white" bgcolor="black">Area</td>
                   <td color="white" bgcolor="black">Puesto</td>
                   <td color="white" bgcolor="black">Vacantes</td>
+                  <td color="white" bgcolor="black">Estado</td>
                   <td color="white" bgcolor="black"></td>
                   <td color="white" bgcolor="black"></td>
                 </tr>
@@ -32,13 +33,24 @@
                     <td>
                       {{ solicitud.6 }}
                     </td>
-
-                     <td bgcolor="#2B2D83" width="60">
-                      <center><a href="/ed_solicitud/{{solicitud.0}}" style="color:#FFFF00;">Editar</a></center>
-                    </td>
-                    <td  bgcolor="#3C3EC5" width="60">
-                      <center><a href="/bo_solicitud/{{solicitud.0}}" style="color:#FFFF00;">Borrar</a></center>
-                    </td>
+                     <td>
+                      {{ solicitud.8 }}
+                     </td>
+                    {% if solicitud.7==1%}
+                         <td bgcolor="#2B2D83" width="60">
+                            <center><a href="/ed_solicitud/{{solicitud.0}}" style="color:#FFFF00;">Editar</a></center>
+                         </td>
+                         <td  bgcolor="#3C3EC5" width="60">
+                             <center><a href="/bo_solicitud/{{solicitud.0}}" style="color:#FFFF00;">Borrar</a></center>
+                         </td>
+                    {% else %}
+                         <td bgcolor="#2B2D83" width="60">
+                            <center><a href="/solicitud" style="color:#FFFF00;">------</a></center>
+                         </td>
+                         <td  bgcolor="#3C3EC5" width="60">
+                             <center><a href="/solicitud" style="color:#FFFF00;">------</a></center>
+                         </td>
+                    {% endif %}
                   </tr>
                 {% endfor %}
               </tbody>
