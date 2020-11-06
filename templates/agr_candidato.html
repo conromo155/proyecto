@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block content %}
+
+            <form action="/agrega_candidato" method="post">
+                <div class="form-row">
+                     &nbsp;&nbsp;&nbsp;&nbsp;
+                     <div class="form-group col-md-2">
+                         <label for="curp">CURP</label>
+                         <input type="text" class="form-control" name="curp" id="curp" placeholder="CURP">
+                     </div>
+                     <div class="form-group col-md-9">
+                         <label for="nombre">Ap. Paterno-Ap. Materno- Nombre(s)</label>
+                         <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Ap. Paterno-Ap. Materno- Nombre(s)">
+                     </div>
+                </div>
+
+
+                <div class="form-group col-md-11">
+                     <label for="domicilio">Domicilio</label>
+                     <input type="text" class="form-control" name="domicilio" id="domicilio" placeholder="Calle y No. - Colonia - Cod. Pos. - Ciudad">
+                </div>
+
+                <div class="form-row">
+                     &nbsp;&nbsp;&nbsp;&nbsp;
+                     <div class="form-group col-md-2">
+                         <label for="telefono">Telefono1</label>
+                         <input type="text" class="form-control" name="telefono" id="telefono" placeholder="999-999-9999">
+                     </div>
+                     <div class="form-group col-md-3">
+                          <label for="correoe">Correo electonico</label>
+                          <input type="email" class="form-control" name="correoe" id="correoe" placeholder="correo@mail.com"">
+                     </div>
+                     <div class="form-group col-md-1">
+                         <label for="edad">Edad</label>
+                         <input type="text" class="form-control" name="edad" id="edad" placeholder="edad">
+                     </div>
+                     <div class="form-group col-md-1">
+                         <label for="nss">N.S.S</label>
+                         <input type="text" class="form-control" name="nss" id="nss" placeholder="N.S.S">
+                     </div>
+
+
+                    <div class="form-group col-md-2">
+                            <label for="sexo">Sexo</label>&nbsp;&nbsp;&nbsp;
+                            <select name="sexo" id="sexo" class="form-control">
+                                <option value="0" selected>Choose...</option>
+                                <option value="F">Femenino</option>
+                                <option value="M">Masculino</option>
+                            </select>&nbsp;&nbsp;
+                      </div>
+
+                     <div class="form-group col-md-2">
+                            <label for="edociv">E. Civil</label>&nbsp;&nbsp;&nbsp;
+                            <select name="edociv" id="edociv" class="form-control">
+                                <option value="0" selected>Choose...</option>
+                                {% for estado in ecivil %}
+                                    <option value="{{ estado.0 }}">{{ estado.1 }}</option>
+                                {%   endfor %}
+                            </select>&nbsp;&nbsp;
+                      </div>
+
+                </div>
+                <button type="submit" class="btn btn-primary">Agrega</button>
+            </form>
+
+
+{% endblock %}

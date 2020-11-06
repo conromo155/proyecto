@@ -15,23 +15,23 @@
 
               <div class="form-row">
                     <div class="form-group col-md-2">
-                        <label for="salario">Salario Anual</label>
-                        <input type="text" class="form-control" name="salario" id="salario" placeholder="000000.00">
+                        <label for="salario">Salario Anual $</label>
+                        <input type="text" class="form-control" name="salario" id="salario" placeholder="000000.00"  pattern="[0-9.]+" required>
                     </div>
                     <div class="form-group col-md-8">
                         <label for="beneficios">Beneficios</label>
-                        <input type="text" class="form-control" name="beneficios" id="beneficios" placeholder="Beneficios">
+                        <input type="text" class="form-control" name="beneficios" id="beneficios" placeholder="Beneficios" required>
                     </div>
                     <div class="form-group col-md-2">
                         <label for="bonos">Bonos</label>
-                        <input type="text" class="form-control" name="bonos" id="bonos" placeholder="000000.00">
+                        <input type="text" class="form-control" name="bonos" id="bonos" placeholder="000000.00" pattern="[0-9.]+" required>
                     </div>
               </div>
 
               <div class="form-row">
                   <label>Requiera autorización</label>&nbsp;&nbsp;&nbsp;&nbsp;
                   <div class="form-check rorm-check-inline">
-                      <input class="form-check-input" type="radio" name="autorizar" id="autorizar1" value="0">
+                      <input class="form-check-input" type="radio" name="autorizar" id="autorizar1" value="0" checked>
                       <label class="form-check-label" for="autorizar1">Si</label>
                   </div>
                   &nbsp;&nbsp;&nbsp;

@@ -11,12 +11,13 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">GYM Evolucion</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
         </button>
+            <a class="navbar-brand" href="/">
+            <img src="{{url_for('static', filename='icono.jpg')}}" class="mr-3" alt="..." width="180" height="30"> GYM Evolucion : {{g.user.username}} -- {{g.user.funcion}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
 
-        <main class="container">
+
             <div class="dropdown mb-3">
                 <a href="" class="btn btn-secondary dropdown-toggle" role="button" id="catalogos"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -29,25 +30,51 @@
                     <a href="/habilidad" class="dropdown-item">Habilidad</a>
                     <a href="#" class="dropdown-item">Area</a>
                     <div class="dropdown-divider"></div>
-                    <a href="/puesto" class="dropdown-item">Puesto</a>
+
                     <a href="/medio" class="dropdown-item">Medio de publicidad</a>
                     <a href="/contacto" class="dropdown-item">Contacto</a>
+
                     <a href="/empresa" class="dropdown-item">Datos de la empresa</a>
                 </div>
             </div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
              <div class="dropdown mb-3">
                 <a href="" class="btn btn-secondary dropdown-toggle" role="button" id="Empresa"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     Procesos de la Empresa
                 </a>
                 <div class="dropdown-menu" aria-labelledby="Empresa">
+                     <a href="/puesto" class="dropdown-item">Puesto</a>
                     <a href="/solicitud" class="dropdown-item">Solicitud de personal</a>
                     <a href="/autoriza" class="dropdown-item">Autorización de Solicitud</a>
-                    <a href="/archivos" class="dropdown-item">Publicación de Oferta</a>
-                    <a href="#" class="dropdown-item">Captura de solicitantes</a>
+                    <a href="/a_publicar" class="dropdown-item">Publicación de Oferta</a>
+                    <a href="/candidato" class="dropdown-item">Solicitante</a>
+                    <a href="/home" class="dropdown-item">Calificación psicologica</a>
+                    <a href="/home" class="dropdown-item">Calificación medica</a>
+                    <a href="/home" class="dropdown-item">Calificación tecnica</a>
+                    <a href="/home" class="dropdown-item">Validación de referencias</a>
+                    <a href="/home" class="dropdown-item">Selección de candidatos</a>
+                </div>
+             </div>
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             <div class="dropdown mb-3">
+                <a href="" class="btn btn-secondary dropdown-toggle" role="button" id="Empresa"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Administración del sistema
+                </a>
+                <div class="dropdown-menu" aria-labelledby="Empresa">
+                     <a href="/perfil" class="dropdown-item">Perfil/a>
+                     <a href="/usuario" class="dropdown-item">Usuarios</a>
+
                 </div>
             </div>
-            &nbsp;<right><a class="nav-link" href="{{ url_for('home') }}">Home</a></right>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <a class="btn btn-success" href="{{ url_for('home') }}" style="color:#FFFFFF;background:#6C6968">Home</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-success" href="{{ url_for('salir') }}"  style="color:#FFFFFF;background:#6C6968">Salir</a>
+
 
 	    <script type="text/javascript" src="/static/js/jquery-3.2.1.slim.min.js"></script>
         <script type="text/javascript" src="/static/js/popper.min.js"></script>

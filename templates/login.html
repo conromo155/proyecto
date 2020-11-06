@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <!----  Liga a bootstrap (framework CSS)---!>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <!---- Liga a CSS local----!>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+</head>
+<body>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <center>
+    <table width="20%" border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+       <tbody>
+        <tr>
+            <td color="FFFFFF" bgcolor="#990033" valign="top">
+                Login
+            </td>
+        </tr>
+        <tr>
+          <td color="FFFFFF" bgcolor="#465F5A" valign="top">
+            <form action="/inicio" method="post">
+                <div class="form-group col-md-10">
+                    <label for="usuario">Usuario</label>
+                    <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Nombre">
+                </div>
+                <div class="form-group col-md-10">
+                    <label for="passw">Password</label>
+                    <input type="password" class="form-control" name="passw" id="passw" placeholder="**********">
+                </div>
+                &nbsp;&nbsp;&nbsp;
+                <button type="submit" class="btn btn-primary">Entrar</button>
+                <br>&nbsp;<br>
+            </form>
+          </td>
+        </tr>
+       </tbody>
+    </table>
+    </center>
+
+</body>
+</html>

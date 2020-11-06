@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+
+{% block content %}
+            <center><h3>Definición del perfil</h3></center>
+            <form action="/modifica_perfil/{{perfiles.0[0]}}" method="post">
+              <div class="form-row">
+                  <label for="descripcion">Descripción del puesto</label>
+              </div>
+              <div class="form-row">
+
+                <div class="col">
+                    <input type="text" class="form-control" name="descripcion" id="descripcion" value="{{perfiles.0[1]}}">
+                </div>
+
+              </div>
+
+
+              <button type="submit" class="btn btn-primary">Actualiza</button>
+            </form>
+<!-- -----------------------------------------------------------------  -->
+            <br>
+            <center><h3>Procesos asociadas</h3></center>
+
+             <div class="panel panel-primary">
+                  <div class="panel-heading" >
+                    <form class="form-inline" action="/agrega_proceso_perfil" method="post">
+                        <div class="form-row">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="hidden" name="per" id="per" value="{{perfiles.0[0]}}" >
+                             <label for="proceso">Proceso</label>&nbsp;&nbsp;&nbsp;
+                             <select name="proceso" id="proceso" class="form-control">
+                             <option value="0" selected>Choose...</option>
+                                 {%
+                                     for proceso in procesos
+                                 %}
+                                     <option value="{{ proceso.0 }}">{{ proceso.1 }}</option>
+                                {%   endfor %}
+                             </select>&nbsp;&nbsp;&nbsp;
+                             <label for="permiso">Permiso</label>&nbsp;&nbsp;&nbsp;
+                             <select name="permiso" id="permiso" class="form-control">
+                             <option value="0" selected>Choose...</option>
+                                 {%
+                                     for permiso in permisos
+                                 %}
+                                     <option value="{{ permiso.0 }}">{{ permiso.1 }}</option>
+                                {%   endfor %}
+                             </select>&nbsp;&nbsp;&nbsp;
+
+                         </div>&nbsp;&nbsp;&nbsp;
+                        <button type="submit" class="btn btn-primary">Agrega proceso</button>
+                    </form>
+                  </div>
+                  <br>
+                  <div class="panel-body">
+                        <center>
+                        <table width="80%" border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+                          <thead>
+                            <tr>
+                              <td color="white" bgcolor="black">Proceso</td>
+                              <td color="white" bgcolor="black">Permiso</td>
+                              <td color="white" bgcolor="black"></td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for perm_perfil in per_proc %}
+                              <tr>
+                                <td>
+                                  {{ perm_perfil.2 }}
+                                </td>
+                                <td>
+                                  {{ perm_perfil.5 }}
+                                </td>
+                                <td  bgcolor="#3C3EC5" width="60">
+                                  <center><a href="/bo_hab_pto/{{perm_perfil.0}}/{{perm_perfil.4}}" style="color:#FFFF00;">Borrar</a></center>
+                                </td>
+
+                              </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                        </center>
+                  </div>
+            </div>
+
+
+{% endblock %}

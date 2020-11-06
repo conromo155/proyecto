@@ -17,7 +17,7 @@
               <div class="form-row">
                     <div class="form-group col-md-2">
                         <label for="salario">Salario Anual</label>
-                        <input type="text" class="form-control" name="salario" id="salario" value="{{puestos.0[2]}}">
+                        <input type="text" class="form-control" name="salario" id="salario" value="{{puestos.0[2]}}" pattern="[0-9.]+" required>
                     </div>
                     <div class="form-group col-md-8">
                         <label for="beneficios">Beneficios</label>
@@ -25,7 +25,7 @@
                     </div>
                     <div class="form-group col-md-2">
                         <label for="bonos">Bonos</label>
-                        <input type="text" class="form-control" name="bonos" id="bonos" value="{{puestos.0[4]}}">
+                        <input type="text" class="form-control" name="bonos" id="bonos" value="{{puestos.0[4]}}" pattern="[0-9.]+" required>
                     </div>
               </div>
 

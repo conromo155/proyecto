@@ -1,0 +1,270 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+            <form action="/modifica_candidato" method="post">
+                <div class="form-row">
+                     &nbsp;&nbsp;&nbsp;&nbsp;
+                     <div class="form-group col-md-2">
+                         <label for="curp">CURP</label>
+                         <input type="text" class="form-control" name="curp" id="curp" value="{{candidatos.0[0]}}">
+                     </div>
+                     <div class="form-group col-md-9">
+                         <label for="nombre">Ap. Paterno-Ap. Materno- Nombre(s)</label>
+                         <input type="text" class="form-control" name="nombre" id="nombre" value="{{candidatos.0[1]}}">
+                     </div>
+                </div>
+
+
+                <div class="form-group col-md-11">
+                     <label for="domicilio">Domicilio</label>
+                     <input type="text" class="form-control" name="domicilio" id="domicilio" value="{{candidatos.0[2]}}">
+                </div>
+
+                <div class="form-row">
+                     &nbsp;&nbsp;&nbsp;&nbsp;
+                     <div class="form-group col-md-2">
+                         <label for="telefono">Telefono1</label>
+                         <input type="text" class="form-control" name="telefono" id="telefono" value="{{candidatos.0[3]}}">
+                     </div>
+                     <div class="form-group col-md-3">
+                          <label for="correoe">Correo electonico</label>
+                          <input type="email" class="form-control" name="correoe" id="correoe" value="{{candidatos.0[4]}}">
+                     </div>
+                     <div class="form-group col-md-1">
+                         <label for="edad">Edad</label>
+                         <input type="text" class="form-control" name="edad" id="edad" value="{{candidatos.0[6]}}">
+                     </div>
+                     <div class="form-group col-md-1">
+                         <label for="nss">N.S.S</label>
+                         <input type="text" class="form-control" name="nss" id="nss" value="{{candidatos.0[7]}}">
+                     </div>
+
+                    <div class="form-group col-md-2">
+                            <label for="sexo">Sexo</label>&nbsp;&nbsp;&nbsp;
+                            <select name="sexo" id="sexo" class="form-control">
+                                <option value="0" selected>Choose...</option>
+                                {% if candidatos.0[5]=="F"%}
+                                        <option value="F" selected="true">Femenino</option>
+                                    {% else %}
+                                         <option value="F">Femenino</option>
+                                {% endif %}
+                                {% if candidatos.0[5]=="M"%}
+                                        <option value="M" selected="true">Masculino</option>
+                                    {% else %}
+                                         <option value="M">Masculino</option>
+                                {% endif %}
+                            </select>&nbsp;&nbsp;
+                    </div>
+                    <div class="form-group col-md-2">
+                            <label for="edociv">Puesto</label>&nbsp;&nbsp;&nbsp;
+                            <select name="edociv" id="edociv" class="form-control">
+                                <option value="0" selected>Choose...</option>
+                                {% for estado in ecivil %}
+                                    {% if candidatos.0[8]==estado.0%}
+                                        <option value="{{ estado.0 }}" selected="true">{{ estado.1 }}</option>
+                                    {% else %}
+                                         <option value="{{ estado.0 }}">{{ estado.1 }}</option>
+                                    {% endif %}
+                                {%   endfor %}
+                            </select>&nbsp;&nbsp;
+                    </div>
+
+
+                </div>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="submit" class="btn btn-primary">Modifica</button>
+            </form>
+
+<!-- -----------------------------------------------------------------  -->
+            <br>
+            <center><h3>Habilidades asociadas</h3></center>
+
+             <div class="panel panel-primary">
+                  <div class="panel-heading" >
+                    <form class="form-inline" action="/agrega_hab_can" method="post">
+                        <div class="form-row">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="hidden" name="curph" id="curph" value="{{candidatos.0[0]}}" >
+                             <label for="habil">Habilidad</label>&nbsp;&nbsp;&nbsp;
+                             <select name="habil" id="habil" class="form-control">
+                             <option value="0" selected>Choose...</option>
+                                 {%
+                                     for hab in habs
+                                 %}
+                                     <option value="{{ hab.0 }}">{{ hab.1 }}</option>
+                                {%   endfor %}
+                             </select>&nbsp;&nbsp;&nbsp;
+                             <label for="expe">Experiencia</label>&nbsp;&nbsp;&nbsp;
+                             <input type="text" class="form-control" name="expe" id="expe" placeholder="tiempo de experiencia">&nbsp;&nbsp;&nbsp;
+                         </div>&nbsp;&nbsp;&nbsp;
+                        <button type="submit" class="btn btn-primary">Agrega habilidad</button>
+                    </form>
+                  </div>
+                  <br>
+                  <div class="panel-body">
+                        <center>
+                        <table width="80%" border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+                          <thead>
+                            <tr>
+                              <td color="white" bgcolor="black">Habilidad</td>
+                              <td color="white" bgcolor="black">Experiencia</td>
+                              <td color="white" bgcolor="black"></td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for can_hab in can_habs %}
+                              <tr>
+                                <td>
+                                  {{ can_hab.2 }}
+                                </td>
+                                <td>
+                                  {{ can_hab.5 }}
+                                </td>
+                                <td  bgcolor="#3C3EC5" width="60">
+                                  <center><a href="/bo_hab_can/{{can_hab.0}}/{{can_hab.4}}" style="color:#FFFF00;">Borrar</a></center>
+                                </td>
+
+                              </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                        </center>
+                  </div>
+            </div>
+
+<!-- -----------------------------------------------------------------  -->
+            <br>
+            <center><h3>Idiomas Asociadas</h3></center>
+
+             <div class="panel panel-primary">
+                  <div class="panel-heading" >
+                    <form class="form-inline" action="/agrega_idio_can" method="post">
+                        <div class="form-row">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="hidden" name="curpi" id="curpi" value="{{candidatos.0[0]}}" >
+                             <label for="idio">Idioma</label>&nbsp;&nbsp;&nbsp;
+                             <select name="idio" id="idio" class="form-control">
+                             <option value="0" selected>Choose...</option>
+                                 {%
+                                     for idioma in idiomas
+                                 %}
+                                     <option value="{{ idioma.0 }}">{{ idioma.1 }}</option>
+                                {%   endfor %}
+                             </select>&nbsp;&nbsp;&nbsp;
+                             <label for="nive">Nivel</label>&nbsp;&nbsp;&nbsp;
+                             <input type="text" class="form-control" name="nive" id="nive" placeholder="Nivel en el idioma">&nbsp;&nbsp;&nbsp;
+                         </div>&nbsp;&nbsp;&nbsp;
+                        <button type="submit" class="btn btn-primary">Agrega Idioma</button>
+                    </form>
+                  </div>
+                  <br>
+                  <div class="panel-body">
+                        <center>
+                        <table width="80%" border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+                          <thead>
+                            <tr>
+                              <td color="white" bgcolor="black">Idioma</td>
+                              <td color="white" bgcolor="black">Nivel</td>
+                              <td color="white" bgcolor="black"></td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for can_idi in can_idis %}
+                              <tr>
+                                <td>
+                                  {{ can_idi.2 }}
+                                </td>
+                                <td>
+                                  {{ can_idi.5 }}
+                                </td>
+                                <td  bgcolor="#3C3EC5" width="60">
+                                  <center><a href="/bo_idi_can/{{ can_idi.0 }}/{{ can_idi.4 }}" style="color:#FFFF00;">Borrar</a></center>
+                                </td>
+
+                              </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                        </center>
+                  </div>
+            </div>
+
+<!-- -----------------------------------------------------------------  -->
+            <br>
+            <center><h3>Estudios</h3></center>
+
+             <div class="panel panel-primary">
+                  <div class="panel-heading" >
+                    <form class="form-inline" action="/agrega_estudio_can" method="post">
+                        <div class="form-row">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="hidden" name="curpe" id="curpe" value="{{candidatos.0[0]}}" >
+                             <label for="nivest">Nivel de estudio</label>&nbsp;&nbsp;&nbsp;
+                             <select name="nivest" id="nivest" class="form-control">
+                             <option value="0" selected>Choose...</option>
+                                 {%
+                                     for naca in nacas
+                                 %}
+                                     <option value="{{ naca.0 }}">{{ naca.1 }}</option>
+                                {%   endfor %}
+                             </select>
+                            <label for="carre">Nivel de estudio</label>&nbsp;&nbsp;&nbsp;
+                             <select name="carre" id="carre" class="form-control">
+                             <option value="0" selected>Choose...</option>
+                                 {%
+                                     for carrera in carreras
+                                 %}
+                                     <option value="{{ carrera.0 }}">{{ carrera.1 }}</option>
+                                {%   endfor %}
+                             </select>&nbsp;&nbsp;&nbsp;
+                             <label for="insti">Institución</label>&nbsp;&nbsp;&nbsp;
+                             <input type="text" class="form-control" name="insti" id="insti" placeholder="Institución donde estudio">&nbsp;&nbsp;&nbsp;
+                         </div>&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
+                        <button type="submit" class="btn btn-primary">Agrega Estudio</button>
+                    </form>
+                  </div>
+                  <br>
+                  <div class="panel-body">
+                        <center>
+                        <table width="80%" border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+                          <thead>
+                            <tr>
+                              <td color="white" bgcolor="black">Nivel</td>
+                              <td color="white" bgcolor="black">Carrera</td>
+                              <td color="white" bgcolor="black">Institución</td>
+                              <td color="white" bgcolor="black"></td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for can_naca in can_nacas %}
+                              <tr>
+                                <td>
+                                  {{ can_naca.1 }}
+                                </td>
+                                <td>
+                                  {{ can_naca.2 }}
+                                </td>
+                                <td>
+                                  {{ can_naca.6 }}
+                                </td>
+                                <td  bgcolor="#3C3EC5" width="60">
+                                  <center><a href="/bo_est_can/{{ can_naca.0 }}/{{ can_naca.4 }}/{{ can_naca.5 }}" style="color:#FFFF00;">Borrar</a></center>
+                                </td>
+
+                              </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                        </center>
+                  </div>
+            </div>
+
+
+
+{% endblock %}
